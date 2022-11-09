@@ -52,3 +52,6 @@ const styles = StyleSheet.create({
     }
   })
 export default HomeTab;
+
+
+// drawer tab done
