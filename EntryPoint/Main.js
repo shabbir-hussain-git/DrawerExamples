@@ -11,7 +11,10 @@ const Tab = createBottomTabNavigator();
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeTab from "../components/HomeTab";
 import Preference from "../components/TabScreen/Preference";
-
+import { Provider } from 'react-redux'
+import {store} from '../store/store';
+import ESG from "../components/TabScreen/ESG";
+import Alerts from "../components/TabScreen/ESG";
 
 const Stack = createNativeStackNavigator();
 
@@ -20,35 +23,25 @@ const Main = ()=>{
     
     return (
       <>
-        <NavigationContainer>
-          <Stack.Navigator
-            screenOptions={{
-              contentStyle: styles.container,
-            }}
-            >
-            <Stack.Screen
-              name={SCREEN_NAME.homeTab}
-              component={HomeTab}
-              options={{
-                headerShown:false
-              }}
-            />
-            <Stack.Screen
-              name={SCREEN_NAME.pref}
-              component={Preference}
-            />
-             <Stack.Screen
-              name={SCREEN_NAME.alerts}
-              component={Preference}
-            />
-             <Stack.Screen
-              name={SCREEN_NAME.esg}
-              component={Preference}
-            />
-          
-          </Stack.Navigator>
-         
-        </NavigationContainer>
+        <Provider store={store}>
+          <NavigationContainer>
+            <Stack.Navigator
+              screenOptions={{
+                contentStyle: styles.container,
+              }}>
+              <Stack.Screen
+                name={SCREEN_NAME.homeTab}
+                component={HomeTab}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen name={SCREEN_NAME.pref} component={Preference} />
+              <Stack.Screen name={SCREEN_NAME.alerts} component={Alerts} />
+              <Stack.Screen name={SCREEN_NAME.esg} component={ESG} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </Provider>
       </>
     );
 }

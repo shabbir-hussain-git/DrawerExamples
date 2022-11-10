@@ -24,7 +24,6 @@ const HeaderLeft = ({navigation})=>{
     }
 
     const openModal = ()=>{
-      console.log('hi',modalVisible);
       setModalVisible(prev=>{
         return true
       })

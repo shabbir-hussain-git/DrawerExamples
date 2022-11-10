@@ -8,8 +8,8 @@ const WatchList = ()=>{
     return (
         <>
          <View style={styles.container}>
-                <Text>WatchList Screen</Text>
-        </View>
+            <Text style={styles.textStyle}>WatchList Screen</Text>
+         </View>
         </>
     )
 }
@@ -17,6 +17,9 @@ const WatchList = ()=>{
 const styles = StyleSheet.create({
     container:{
         backgroundColor:'black'
+    },
+    textStyle:{
+        color:"white"
     }
 })
 export default WatchList;
