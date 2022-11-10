@@ -16,19 +16,25 @@ const Portfolio = ()=>{
             countHandler(prev=>{
                 return  (prev+1);
             });
-            // const interval = setInterval(() => {
-            //     console.log('This will run every 10 second!');
-            //   }, 10000);
+            const interval = setInterval(() => {
+                console.log('This will run every 10 second!');
+                checkLoading();
+            }, 10000);
 
-            console.log(isFocused);
+            checkLoading();
             const unsubscribe = ()=>{
-                //  clearInterval(interval);
+                 clearInterval(interval);
             }
             return () => unsubscribe();
 
         }, [])
       );
     
+    const checkLoading = ()=>{
+        if(Util.toLoadData('portfolioTime')){
+            Alert.alert('Loading')
+        }
+    }
     const getPortfolioData = async ()=>{
        
         nameHandler('Hussain')

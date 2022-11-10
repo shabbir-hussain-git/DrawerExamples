@@ -1,3 +1,4 @@
+import STATE from "./STATE";
 
 
 class Util{
@@ -22,6 +23,28 @@ class Util{
         }
 
 
+    }
+
+    static toLoadData(param){
+        try{
+            console.log( STATE[param])
+            let initial = STATE[param].initial;
+            if(initial!=null){
+                let current = new Date().getTime();
+                let diff = ((current - initial)/1000);
+                console.log('Shabbir ',diff)
+                if(diff > STATE[param].threshold){
+                    STATE[param].initial =  new Date().getTime();
+                    return true;
+                }
+            }else{
+                STATE[param].initial =  new Date().getTime();
+                return true;
+            }
+        }catch(e){
+
+        }
+        return false;
     }
 }
 
