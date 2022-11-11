@@ -3,9 +3,7 @@ import Util from '../Util/Util'
 const initialState = {
   value: 0,
   arr:[],
-  loading:false,
-  threshold:10,
-  initial:''
+  loading:false
 }
 
 export const portfolio = createSlice({
@@ -17,33 +15,30 @@ export const portfolio = createSlice({
     },
     updateLoading:(state,action)=>{
       state.loading = action.payload;
-    },
-    updateInitialState:(state,action)=>{
-      state.initial = new Date().getTime();
     }
   },
 })
 
 const loadPortfolioData = (state)=>{
   return async (dispatch)=>{
-    let toLoad = true;
-    if(state.initial){
-      // toLoad = false;
-      toLoad =  Util.toLoad(state.initial,10);
-      
-    }else{
-      dispatch(updateInitialState());
-    }
+    let toLoad = (!state.loading) && Util.toLoadData(state);
     if(toLoad){
+      state.loading = true;
+      state.count = state.count + 1;
+      state.name = state.name + " - "+state.count;
+      console.log(state);
+      console.log('--------Loading Started ---------')
       dispatch(updateLoading(true));
       const  data =  await Util.getData('services/portfolio/myPortfolio');
       // console.log(data);
       dispatch(updateLoading(false));
+      state.loading = false;
+      console.log('--------Loading End ---------')
     }
   }
 }
 // Action creators are generated for each case reducer function
-export const { incrementByAmount ,updateLoading,updateInitialState} = portfolio.actions
+export const { incrementByAmount ,updateLoading} = portfolio.actions
 export {
   loadPortfolioData
 };

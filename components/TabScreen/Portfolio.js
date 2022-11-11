@@ -19,16 +19,16 @@ const Portfolio = ()=>{
     useFocusEffect(
         React.useCallback(() => {
             
-            // const interval = setInterval(() => {
-            //     console.log('---->hahah')
-            //     getPortfolioData();
-            // }, 4000);
+            const interval = setInterval(() => {
+                console.log('---->hahah')
+                getPortfolioData();
+            }, 4000);
             console.log('---->1')
             // checkLoading();
             getPortfolioData();
 
             const unsubscribe = ()=>{
-                //  clearInterval(interval);
+                 clearInterval(interval);
             }
             return () => unsubscribe();
 
@@ -45,8 +45,8 @@ const Portfolio = ()=>{
     const getPortfolioData = async ()=>{   
         // Alert.alert('Loading');
         console.log('Portfolio This will run every 10 second!'); 
-        console.log('----',porfolioState,'-----');
-        dispatch(loadPortfolioData(porfolioState || {}))
+        console.log('----',STATE['portfolioTime'],'-----');
+        dispatch(loadPortfolioData(STATE['portfolioTime']))
     }
     if(porfolioState.loading){
         return (

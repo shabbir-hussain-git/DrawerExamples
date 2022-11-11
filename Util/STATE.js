@@ -4,7 +4,10 @@ class STATE {
 
     static portfolioTime = {
         threshold:10,
-        initial:null
+        initial:null,
+        loading:false,
+        name:"Shabbir",
+        count : 1
     };
     static watchlistTime = {
         threshold:10,

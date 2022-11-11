@@ -1,4 +1,3 @@
-import STATE from "./STATE";
 
 
 class Util{
@@ -27,16 +26,16 @@ class Util{
 
     static toLoadData(param){
         try{
-            let initial = STATE[param].initial;
+            let initial =param.initial;
             if(initial!=null){
                 let current = new Date().getTime();
                 let diff = ((current - initial)/1000);
-                if(diff > STATE[param].threshold){
-                    STATE[param].initial =  new Date().getTime();
+                if(diff > param.threshold){
+                    param.initial =  new Date().getTime();
                     return true;
                 }
             }else{
-                STATE[param].initial =  new Date().getTime();
+                param.initial =  new Date().getTime();
                 return true;
             }
         }catch(e){
@@ -45,14 +44,7 @@ class Util{
         return false;
     }
 
-    static toLoad(initial,threshold){
-        let current = new Date().getTime();
-        let diff = ((current - initial)/1000);
-        if(diff > threshold){
-            return true;
-        }
-        return false;
-    }
+   
 }
 
 export default Util;
