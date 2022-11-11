@@ -27,12 +27,10 @@ class Util{
 
     static toLoadData(param){
         try{
-            console.log( STATE[param])
             let initial = STATE[param].initial;
             if(initial!=null){
                 let current = new Date().getTime();
                 let diff = ((current - initial)/1000);
-                console.log('Shabbir ',diff)
                 if(diff > STATE[param].threshold){
                     STATE[param].initial =  new Date().getTime();
                     return true;
@@ -43,6 +41,15 @@ class Util{
             }
         }catch(e){
 
+        }
+        return false;
+    }
+
+    static toLoad(initial,threshold){
+        let current = new Date().getTime();
+        let diff = ((current - initial)/1000);
+        if(diff > threshold){
+            return true;
         }
         return false;
     }
