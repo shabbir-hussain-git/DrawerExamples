@@ -3,7 +3,8 @@ import Util from '../Util/Util'
 const initialState = {
   value: 0,
   arr:[],
-  loading:false
+  loading:false,
+  mutate : false,
 }
 
 export const portfolio = createSlice({
@@ -15,6 +16,12 @@ export const portfolio = createSlice({
     },
     updateLoading:(state,action)=>{
       state.loading = action.payload;
+    },
+    mutateData:(state,action)=>{
+      state.mutate = true;
+    },
+    unMutate:(state,action)=>{
+      state.mutate = false;
     }
   },
 })
@@ -38,7 +45,7 @@ const loadPortfolioData = (state)=>{
   }
 }
 // Action creators are generated for each case reducer function
-export const { incrementByAmount ,updateLoading} = portfolio.actions
+export const { incrementByAmount ,updateLoading,mutateData,unMutate} = portfolio.actions
 export {
   loadPortfolioData
 };

@@ -1,4 +1,4 @@
-import React,{ useState } from "react"
+import React,{ useEffect, useState } from "react"
 import { Text ,StyleSheet,View ,Button, Alert} from "react-native"
 import { useFocusEffect,useIsFocused } from '@react-navigation/native';
 
@@ -6,34 +6,56 @@ import Util from "../../Util/Util"
 import STATE from "../../Util/STATE";
 import PortfolioFragment from "./PFolder/PortfolioFragment";
 import Recent from "./PFolder/Recent";
-import {loadPortfolioData} from '../../store/portfolio-slice'
+import {loadPortfolioData,unMutate,mutateData} from '../../store/portfolio-slice'
 import { useDispatch,useSelector } from "react-redux";
 import { store } from "../../store/store";
+import portfolioFetch from "../../datafetching/portfolioFetch";
+import useSWR, { useSWRConfig } from 'swr'
 
 const Portfolio = ()=>{
 
+    const { mutate } = useSWRConfig()
+
+    console.log(new Date().toString(),' --->1.1')
+    const focused = useIsFocused();
     const [change,changeHandler] = useState(new Date());
     const porfolioState = useSelector(store=>store.portfolioSlice);
     const dispatch = useDispatch();
 
+    const { user, isLoading, isError } = portfolioFetch('services/portfolio/myPortfolio',focused)
+
+    console.log('--->1.2')
+
     useFocusEffect(
         React.useCallback(() => {
             
-            const interval = setInterval(() => {
-                console.log('---->hahah')
-                getPortfolioData();
-            }, 4000);
-            console.log('---->1')
+            // const interval = setInterval(() => {
+            //     console.log('---->hahah')
+            //     getPortfolioData();
+            // }, 4000);
             // checkLoading();
-            getPortfolioData();
+            // getPortfolioData();
 
             const unsubscribe = ()=>{
-                 clearInterval(interval);
+                //  clearInterval(interval);
             }
             return () => unsubscribe();
 
         }, [])
       );
+
+      console.log('--89--')
+      console.log(porfolioState.mutate);
+      console.log('--99--')
+    useEffect(()=>{
+       
+        Alert.alert('Mutate start')
+       
+        if(porfolioState.mutate){
+            changeMutate();
+            dispatch(unMutate())
+        }
+    },[porfolioState.mutate])
     
     const checkLoading = ()=>{
         console.log('----',porfolioState.loading,'-----');
@@ -48,7 +70,13 @@ const Portfolio = ()=>{
         console.log('----',STATE['portfolioTime'],'-----');
         dispatch(loadPortfolioData(STATE['portfolioTime']))
     }
-    if(porfolioState.loading){
+    const changeMutate = ()=>{
+        mutate("http://10.0.2.2:4000/services/portfolio/myPortfolio");
+    }
+    const changeMutateNew = ()=>{
+        dispatch(mutateData())
+    }
+    if(isLoading){
         return (
             <View style={styles.container}>
                  <Text style={styles.textStyle}>Loading</Text>
@@ -62,6 +90,7 @@ const Portfolio = ()=>{
                 <Text style={styles.textStyle}>Portfolio Screen</Text>
                 <Button title="Click Me" onPress={getPortfolioData}/>
                 <PortfolioFragment change={change}></PortfolioFragment>
+                <Button onPress={changeMutateNew} title="Mutate"/>
                 <Recent change={change}></Recent>
             </View>
         </>

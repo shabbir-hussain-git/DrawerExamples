@@ -14,14 +14,14 @@ const WatchList = ()=>{
     useFocusEffect(
         React.useCallback(() => {
             
-            const interval = setInterval(() => {
-                console.log('watchlist This will run every 10 second!');
-                checkLoading();
-            }, STATE['watchlistTime'].threshold*1000);
+            // const interval = setInterval(() => {
+            //     console.log('watchlist This will run every 10 second!');
+            //     checkLoading();
+            // }, STATE['watchlistTime'].threshold*1000);
 
-            checkLoading();
+            // checkLoading();
             const unsubscribe = ()=>{
-                 clearInterval(interval);
+                //  clearInterval(interval);
             }
             return () => unsubscribe();
 
