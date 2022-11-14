@@ -22,7 +22,7 @@ const Portfolio = ()=>{
     const porfolioState = useSelector(store=>store.portfolioSlice);
     const dispatch = useDispatch();
 
-    const { user, isLoading, isError } = portfolioFetch('services/portfolio/myPortfolio',focused)
+    const { user, isLoading, isError } = portfolioFetch(focused)
 
     console.log(porfolioState)
 
@@ -30,7 +30,8 @@ const Portfolio = ()=>{
         React.useCallback(() => {
         
             if(STATE.portfolioTime.mutate){
-                Alert.alert('Mutate start 1234')
+                Alert.alert('Mutate start 1234');
+                STATE.portfolioTime.mutate = false;
                 changeMutate();
             }
             const unsubscribe = ()=>{

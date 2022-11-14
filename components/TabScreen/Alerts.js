@@ -12,6 +12,12 @@ const Alerts = ()=>{
         STATE.portfolioTime.mutate = true;
         // dispatch(mutateData());
     }
+
+    const change2 = ()=>{
+        // STATE.portfolioTime.mutate = true;
+        // dispatch(mutateData());
+        // navigation.navigate(SCREEN_NAME.alerts)
+    }
     return (
         <>
             <View style={styles.container}>

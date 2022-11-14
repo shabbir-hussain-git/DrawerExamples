@@ -2,23 +2,20 @@
 import { Text ,StyleSheet,View,Button} from "react-native"
 import { useFocusEffect,useIsFocused } from '@react-navigation/native';
 import React,{useState} from 'react'
+import { useNavigation } from "@react-navigation/native";
+import SCREEN_NAME from "../../Util/constant";
 
 
 const ESG = ()=>{
 
-    const [count,countHandler] = useState(1);
 
     useFocusEffect(
         React.useCallback(() => {
-            countHandler(prev=>{
-                return  (prev+1);
-            });
-            const interval = setInterval(() => {
-                console.log('This will run every 10 ESG second!');
-              }, 10000);
+          
+         
 
             const unsubscribe = ()=>{
-                 clearInterval(interval);
+                //  clearInterval(interval);
             }
             return () => unsubscribe();
 
@@ -27,16 +24,22 @@ const ESG = ()=>{
     
       const getPortfolioData = async ()=>{
        
-        countHandler(prev=>{
-            return  (prev+1);
-        });
+       
     }
  
+    const navigation   = useNavigation();
+
+    const change2 = ()=>{
+        // STATE.portfolioTime.mutate = true;
+        // dispatch(mutateData());
+        navigation.navigate(SCREEN_NAME.alerts)
+    }
     return (
         <>
             <View style={styles.container}>
-                <Text style={styles.textStyle}>ESG Screen + {count}</Text>
+                <Text style={styles.textStyle}>ESG Screen</Text>
                 <Button title="Click Me" onPress={getPortfolioData}/>
+                <Button onPress={change2} title="Go Alerts"/>
 
             </View>
         </>

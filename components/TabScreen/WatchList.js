@@ -1,42 +1,37 @@
 import React,{ useState } from "react"
 import { Text ,StyleSheet,View ,Button, Alert} from "react-native"
-import { useFocusEffect,useIsFocused } from '@react-navigation/native';
 
 import Util from "../../Util/Util"
 import STATE from "../../Util/STATE";
 
+import { useFocusEffect,useIsFocused } from '@react-navigation/native';
 
-
+import watchlistFetch from "../../datafetching/watchlistFetch";
 
 
 const WatchList = ()=>{
  
+    const focused = useIsFocused();
+    const { user, isLoading, isError } = watchlistFetch(focused)
+
     useFocusEffect(
         React.useCallback(() => {
             
-            // const interval = setInterval(() => {
-            //     console.log('watchlist This will run every 10 second!');
-            //     checkLoading();
-            // }, STATE['watchlistTime'].threshold*1000);
+           const unsubscribe = ()=>{
 
-            // checkLoading();
-            const unsubscribe = ()=>{
-                //  clearInterval(interval);
             }
             return () => unsubscribe();
 
         }, [])
       );
     
-    const checkLoading = ()=>{
-        if(Util.toLoadData('watchlistTime')){
-            Alert.alert('Loading')
-        }
-    }
-    const getPortfolioData = async ()=>{
-       
-        await Util.getData('services/portfolio/myPortfolio');
-    }
+      if (isLoading) {
+        return (
+          <View style={styles.container}>
+            <Text style={styles.textStyle}>Loading</Text>
+          </View>
+        );
+      }
     return (
         <>
          <View style={styles.container}>
