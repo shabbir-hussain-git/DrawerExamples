@@ -3,6 +3,7 @@
 class STATE {
 
     static portfolioTime = {
+        mutate:false,
         threshold:10,
         initial:null,
         loading:false,

@@ -6,8 +6,7 @@ const fetcher = (...args) => fetch(...args).then(res => res.json())
 
 export default function portfolioFetch (url,focused) {
     url = pre+url;
-    // console.log('-----------Start-----------')
-    // console.log('focused ',focused,' ');
+   
     const { data, error,isValidating } = useSWR(focused ? url : null, fetcher,{
       revalidateIfStale: false,
       revalidateOnFocus: false,
@@ -15,8 +14,7 @@ export default function portfolioFetch (url,focused) {
       refreshInterval:100000
     })
 
-    // console.log(isValidating)
-    // console.log('-----------End-----------')
+ 
 
     return {
       user: data,

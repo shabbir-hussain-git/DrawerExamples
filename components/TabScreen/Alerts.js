@@ -2,13 +2,15 @@
 import { Text ,StyleSheet,View,Button} from "react-native"
 import { useDispatch } from "react-redux"
 import {mutateData} from '../../store/portfolio-slice';
+import STATE from "../../Util/STATE";
 
 const Alerts = ()=>{
     const dispatch = useDispatch();
 
 
     const change = ()=>{
-        dispatch(mutateData());
+        STATE.portfolioTime.mutate = true;
+        // dispatch(mutateData());
     }
     return (
         <>

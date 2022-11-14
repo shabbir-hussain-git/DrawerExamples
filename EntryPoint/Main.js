@@ -14,7 +14,7 @@ import Preference from "../components/TabScreen/Preference";
 import { Provider } from 'react-redux'
 import {store} from '../store/store';
 import ESG from "../components/TabScreen/ESG";
-import Alerts from "../components/TabScreen/ESG";
+import Alerts from "../components/TabScreen/Alerts";
 
 const Stack = createNativeStackNavigator();
 
