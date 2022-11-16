@@ -46,7 +46,7 @@ const Main = ()=>{
     );
 }
 
-//
+////
 const styles = StyleSheet.create({
   container:{
       backgroundColor:'black'
