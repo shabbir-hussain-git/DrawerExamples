@@ -10,7 +10,7 @@ const GoogleLogin = ()=>{
     const onLoginPress = () =>  {
         GoogleSignin.configure({
             androidClientId: '955692934219-ihct917m45htrvc8iq4udec713i6lbg9.apps.googleusercontent.com',
-            iosClientId: 'ADD_YOUR_iOS_CLIENT_ID_HERE',
+            iosClientId: '955692934219-37upieeuidtpo05j4amkrd740arrm7gk.apps.googleusercontent.com',
         });
     GoogleSignin.hasPlayServices().then((hasPlayService) => {
             if (hasPlayService) {
