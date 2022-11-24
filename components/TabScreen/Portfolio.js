@@ -13,7 +13,7 @@ import portfolioFetch from "../../datafetching/portfolioFetch";
 import useSWR, { useSWRConfig } from 'swr'
 import CardScreen from './CardScreen';
 import { FlashList } from "@shopify/flash-list";
-
+import GoogleLogin from "./GoogleLogin";
 const Portfolio = ()=>{
 
     const { mutate } = useSWRConfig()
@@ -25,8 +25,8 @@ const Portfolio = ()=>{
     const dispatch = useDispatch();
     const [showTop,showTopHandler] = useState(true)
 
-    const { user, isLoading, isError } = portfolioFetch(focused)
-
+    // const { user, isLoading, isError } = portfolioFetch(focused)
+    const isLoading = false;
     console.log(porfolioState)
 
     useFocusEffect(
@@ -35,7 +35,7 @@ const Portfolio = ()=>{
             if(STATE.portfolioTime.mutate){
                 Alert.alert('Mutate start 1234');
                 STATE.portfolioTime.mutate = false;
-                changeMutate();
+               // changeMutate();
             }
             const unsubscribe = ()=>{
 
@@ -67,13 +67,7 @@ const Portfolio = ()=>{
     const changeMutateNew = ()=>{
         dispatch(mutateData())
     }
-    if(isLoading){
-        return (
-            <View style={styles.container}>
-                 <Text style={styles.textStyle}>Loading</Text>
-            </View>
-        )
-    }
+  
 
     let arr = [1,2,3,4,5,6,7,8,9,10];
     const renderItem = (itemData)=>{
@@ -95,6 +89,13 @@ const Portfolio = ()=>{
             }
         }
     }
+    if(isLoading){
+        return (
+            <View style={styles.container}>
+                 <Text style={styles.textStyle}>Loading</Text>
+            </View>
+        )
+    }
     return (
       <>
         <View style={styles.container}>
@@ -113,6 +114,7 @@ const Portfolio = ()=>{
             estimatedItemSize={150}
             onScroll={listScrolled}
           />
+          <GoogleLogin></GoogleLogin>
         </View>
       </>
     );
